@@ -24,8 +24,6 @@ class TodoViewSet(viewsets.ViewSet):
             return Response(serializer.data)
 
     def create(self, request):
-        d = request.data['due_date']
-        timestamp = date.today()
         serializer = TodoSerializer(data=request.data)
         if serializer.is_valid() :
             serializer.save()
@@ -34,8 +32,6 @@ class TodoViewSet(viewsets.ViewSet):
 
     def update(self,request,pk):
         id = pk
-        due_date = request.data['due_date']
-        d = date.today()
         todo = Todo.objects.get(id=id)
         serializer = TodoSerializer(todo, data=request.data)
         if serializer.is_valid():
